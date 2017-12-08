@@ -23,12 +23,11 @@ require 'rails_helper'
 # removed from Rails core in Rails 5, but can be added back in via the
 # `rails-controller-testing` gem.
 
-RSpec.describe GamesController, type: :controller do
+RSpec.describe LeadboardsController, type: :controller do
 
   before do
     User.delete_all
     @user = User.create!(email: 'pichi@gmail.com', password: 'pass1234567')
-    @user2 = User.create!(email: 'pichi2@gmail.com', password: 'pass1234567')
 
     allow(request.env['warden']).to receive(:authenticate!).and_return(@user)
     allow(controller).to receive(:current_user).and_return(@user)
@@ -37,72 +36,41 @@ RSpec.describe GamesController, type: :controller do
   end
 
   # This should return the minimal set of attributes required to create a valid
-  # Game. As you add validations to Game, be sure to
+  # Leadboard. As you add validations to Leadboard, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
     {
       user_id: @user.id,
-      opponent_id: @user2.id,
-      user_score: 14,
-      opponent_score: 12
+      score: 10,
+      games: 2
     }
   }
 
   let(:invalid_attributes) {
     {
-      user_score: 15,
-      opponent_score: 14
+      score: 'foo',
+      games: 'bar'
     }
   }
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
-  # GamesController. Be sure to keep this updated too.
-  #let(:valid_session) { {} }
+  # LeadboardsController. Be sure to keep this updated too.
+  let(:valid_session) { {} }
 
-  describe "GET #index" do
-    it "returns a success response" do
-      game = Game.create! valid_attributes
+  describe 'GET #index' do
+    it 'returns a success response' do
+      leadboard = Leadboard.create! valid_attributes
       get :index, {}
       expect(response).to be_success
     end
   end
 
-  describe "GET #show" do
-    it "returns a success response" do
-      game = Game.create! valid_attributes
-      get :show, {:id => game.to_param}
+  describe 'GET #show' do
+    it 'returns a success response' do
+      leadboard = Leadboard.create! valid_attributes
+      get :show, {:id => leadboard.to_param}
       expect(response).to be_success
     end
   end
-
-  describe "GET #new" do
-    it "returns a success response" do
-      get :new, {}
-      expect(response).to be_success
-    end
-  end
-
-  describe "POST #create" do
-    context "with valid params" do
-      it "creates a new Game" do
-        expect {
-          post :create, {:game => valid_attributes}
-        }.to change(Game, :count).by(1)
-      end
-
-      it "redirects to the created game" do
-        post :create, {:game => valid_attributes}
-        expect(response).to redirect_to(Game.last)
-      end
-    end
-
-    context "with invalid params" do
-      it "returns a success response (i.e. to display the 'new' template)" do
-        post :create, {:game => invalid_attributes}
-        expect(response).to be_success
-      end
-    end
-  end
-
 end

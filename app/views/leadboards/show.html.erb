@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<table class="table">
+  <thead>
+    <th>User</th>
+    <th>Score</th>
+    <th>Games</th>
+  </thead>
+  <tbody>
+    <tr>
+      <td><%= @leadboard.user.email %></td>
+      <td><%= @leadboard.score %></td>
+      <td><%= @leadboard.games %></td>
+    <tr>
+  </tbody>
+</table>
+
+<h1>Listing User Games</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Match date</th>
+      <th>User</th>
+      <th>Opponent</th>
+      <th>User score</th>
+      <th>Opponent score</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @leadboard.user.games.each do |game| %>
+      <tr>
+        <td><%= game.match_date %></td>
+        <td><%= game.user.email %></td>
+        <td><%= game.opponent.email %></td>
+        <td><%= game.user_score %></td>
+        <td><%= game.opponent_score %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'Back', leadboards_path, class: 'btn btn-info' %>

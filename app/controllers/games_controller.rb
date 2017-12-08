@@ -48,7 +48,7 @@ class GamesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_game
-      @game = Game.find(params[:id])
+      @game = Game.where('user_id = ? or opponent_id = ? AND id = ?', current_user.id, current_user.id, params[:id]).first
     end
 
     # Only allow a trusted parameter "white list" through.

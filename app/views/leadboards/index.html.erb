@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Leaderboards</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Score</th>
+      <th>Games</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @leadboards.each do |leadboard| %>
+      <tr>
+        <td><%= leadboard.user.email %></td>
+        <td><%= leadboard.score %></td>
+        <td><%= leadboard.games %></td>
+        <td><%= link_to 'Show', leadboard %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

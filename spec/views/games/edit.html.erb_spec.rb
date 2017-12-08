@@ -2,11 +2,15 @@ require 'rails_helper'
 
 RSpec.describe "games/edit", type: :view do
   before(:each) do
+    User.delete_all
+    @user = User.create!(email: 'pich@gmail.com', password: 'secret12345')
+    @user2 = User.create!(email: 'pich2@gmail.com', password: 'secret12345')
+
     @game = assign(:game, Game.create!(
-      :user => nil,
-      :opponent_id => 1,
-      :user_score => 1,
-      :opponent_score => 1
+      :user => @user,
+      :opponent_id => @user2.id,
+      :user_score => 14,
+      :opponent_score => 12
     ))
   end
 
