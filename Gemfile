@@ -11,7 +11,6 @@ gem 'turbolinks',   '~> 2.5.3'
 gem 'devise',       '~> 3.5.2'
 gem 'devise-bootstrap-views', '~> 0.0.6'
 gem 'pg'
-gem 'rails_12factor', group: :production
 
 group :development, :test do
   gem 'sqlite3'
