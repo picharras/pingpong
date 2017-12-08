@@ -15,18 +15,26 @@ class Game < ActiveRecord::Base
   private
 
   def validate_minimum_score
-    if self.user_score < 11 && self.opponent_score < 11
-      errors[:base] << 'At least a score should be greater than 11'
+    # if self.user_score < 11 && self.opponent_score < 11
+    #   errors[:base] << 'At least a score should be greater than 11'
+    # end
+
+    if self.user_score < 21 && self.opponent_score < 21
+      errors[:base] << 'At least a score should be greater than 21'
     end
   end
 
   def validate_score_difference
     score_difference = (self.user_score - self.opponent_score).abs
-    some_score_is_21 = self.user_score > 20 || self.opponent_score > 20 ? true : false
+    #some_score_is_21 = self.user_score > 20 || self.opponent_score > 20 ? true : false
 
-    if score_difference < 2 && some_score_is_21 == false
+    # if score_difference < 2 && some_score_is_21 == false
+    #   errors[:base] << 'There must be a difference of two points'        
+    # end
+    if score_difference < 2
       errors[:base] << 'There must be a difference of two points'        
     end
+
   end
 
   def update_leadboard

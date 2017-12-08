@@ -11,8 +11,8 @@ RSpec.describe Game, type: :model do
     {
       user_id: @user.id,
       opponent_id: @user2.id,
-      user_score: 14,
-      opponent_score: 12
+      user_score: 22,
+      opponent_score: 20
     }
   }
 
